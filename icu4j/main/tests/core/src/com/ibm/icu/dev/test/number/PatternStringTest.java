@@ -36,6 +36,7 @@ public class PatternStringTest {
     public void testToPatternSimple() {
         String[][] cases = {
                 { "#", "0" },
+                { "#0.0#,#", "#0.0#,#"},
                 { "0", "0" },
                 { "#0", "0" },
                 { "###", "0" },
@@ -63,6 +64,8 @@ public class PatternStringTest {
 
             DecimalFormatProperties properties = PatternStringParser.parseToProperties(input);
             String actual = PatternStringUtils.propertiesToPatternString(properties);
+            System.out.println("Here .................... ");
+            System.out.println(actual);
             assertEquals("Failed on input pattern '" + input + "', properties " + properties,
                     output,
                     actual);
@@ -100,6 +103,7 @@ public class PatternStringTest {
     public void testExceptionOnInvalid() {
         String[] invalidPatterns = {
                 "#.#.#",
+                "#0.0#,#",
                 "0#",
                 "0#.",
                 ".#0",

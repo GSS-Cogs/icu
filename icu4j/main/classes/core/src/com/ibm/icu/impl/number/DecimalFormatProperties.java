@@ -94,6 +94,7 @@ public class DecimalFormatProperties implements Cloneable, Serializable {
     private transient boolean exponentSignAlwaysShown;
     private transient int formatWidth;
     private transient int groupingSize;
+    private transient int fractionalGroupingSize;
     private transient boolean groupingUsed;
     private transient int magnitudeMultiplier;
     private transient MathContext mathContext; // ICU4J-only
@@ -166,6 +167,7 @@ public class DecimalFormatProperties implements Cloneable, Serializable {
         exponentSignAlwaysShown = false;
         formatWidth = -1;
         groupingSize = -1;
+        fractionalGroupingSize = -1;
         groupingUsed = true;
         magnitudeMultiplier = 0;
         mathContext = null;
@@ -212,6 +214,7 @@ public class DecimalFormatProperties implements Cloneable, Serializable {
         exponentSignAlwaysShown = other.exponentSignAlwaysShown;
         formatWidth = other.formatWidth;
         groupingSize = other.groupingSize;
+        fractionalGroupingSize = other.fractionalGroupingSize;
         groupingUsed = other.groupingUsed;
         magnitudeMultiplier = other.magnitudeMultiplier;
         mathContext = other.mathContext;
@@ -259,6 +262,7 @@ public class DecimalFormatProperties implements Cloneable, Serializable {
         eq = eq && _equalsHelper(exponentSignAlwaysShown, other.exponentSignAlwaysShown);
         eq = eq && _equalsHelper(formatWidth, other.formatWidth);
         eq = eq && _equalsHelper(groupingSize, other.groupingSize);
+        eq = eq && _equalsHelper(fractionalGroupingSize, other.fractionalGroupingSize);
         eq = eq && _equalsHelper(groupingUsed, other.groupingUsed);
         eq = eq && _equalsHelper(magnitudeMultiplier, other.magnitudeMultiplier);
         eq = eq && _equalsHelper(mathContext, other.mathContext);
@@ -322,6 +326,7 @@ public class DecimalFormatProperties implements Cloneable, Serializable {
         hashCode ^= _hashCodeHelper(exponentSignAlwaysShown);
         hashCode ^= _hashCodeHelper(formatWidth);
         hashCode ^= _hashCodeHelper(groupingSize);
+        hashCode ^= _hashCodeHelper(fractionalGroupingSize);
         hashCode ^= _hashCodeHelper(groupingUsed);
         hashCode ^= _hashCodeHelper(magnitudeMultiplier);
         hashCode ^= _hashCodeHelper(mathContext);
@@ -449,6 +454,10 @@ public class DecimalFormatProperties implements Cloneable, Serializable {
 
     public int getGroupingSize() {
         return groupingSize;
+    }
+
+    public int getFractionalGroupingSize() {
+        return fractionalGroupingSize;
     }
 
     public boolean getGroupingUsed() {
@@ -789,6 +798,20 @@ public class DecimalFormatProperties implements Cloneable, Serializable {
      */
     public DecimalFormatProperties setFormatWidth(int paddingWidth) {
         this.formatWidth = paddingWidth;
+        return this;
+    }
+
+    /**
+     * Sets the number of digits between grouping separators in the fractional part. For example, the <em>en-US</em> locale uses
+     * a grouping size of 3, so the number 123.4567 would be formatted as "123.456,7". For locales whose
+     * grouping sizes vary with magnitude, see {@link #setSecondaryGroupingSize(int)}.
+     *
+     * @param groupingSize
+     *            The primary grouping size.
+     * @return The property bag, for chaining.
+     */
+    public DecimalFormatProperties setFractionalGroupingSize(int fractionalGroupingSize) {
+        this.fractionalGroupingSize = fractionalGroupingSize;
         return this;
     }
 

@@ -294,7 +294,7 @@
             <delete dir="${junit.out.dir}/checkTest"/>
             <mkdir dir="${junit.out.dir}/checkTest"/>
 
-            <junit printsummary="yes" fork="yes">
+            <junit printsummary="yes" fork="yes" showOutput="true">
                 <jvmarg value="-ea"/>
                 <jvmarg value="-Djava.awt.headless=true"/>
                 <jvmarg value="-DICU.exhaustive=10"/>

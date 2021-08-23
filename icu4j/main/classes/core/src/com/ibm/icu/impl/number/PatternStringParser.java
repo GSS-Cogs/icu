@@ -178,6 +178,8 @@ public class PatternStringParser {
 
     public static class ParsedSubpatternInfo {
         public long groupingSizes = 0x0000ffffffff0000L;
+        // Not sure what is this number for?  Decimal value - 281474976645120
+        public long fractionalGroupingSizes = 0x0000ffffffff0000L;
         public int integerLeadingHashSigns = 0;
         public int integerTrailingHashSigns = 0;
         public int integerNumerals = 0;
@@ -451,6 +453,12 @@ public class PatternStringParser {
         int zeroCounter = 0;
         while (true) {
             switch (state.peek()) {
+            case ',':
+                result.widthExceptAffixes += 1;
+//                result.groupingSizes <<= 16;
+                result.fractionalGroupingSizes <<= 16;
+                break;
+
             case '#':
                 result.widthExceptAffixes += 1;
                 result.fractionHashSigns += 1;
